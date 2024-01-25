@@ -7,7 +7,7 @@
                     <Radio label="file">文件</Radio>
                 </RadioGroup>
             </FormItem>
-            <FormItem v-else label="数据内容">
+            <FormItem label="数据内容">
                 <Input v-if="fileType==='text'" v-model="fileText" type="textarea"
                        placeholder="经纬度/16进制轮廓/S2索引/WKT"
                        :rows="3"

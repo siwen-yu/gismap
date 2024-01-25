@@ -1,12 +1,12 @@
 <template>
     <div class="amap-page-container">
         <div id="container" class="amap-demo" tabindex="0"></div>
-
-        <ButtonGroup vertical>
-            <Button icon="md-thumbs-up" @click="feedbackModal = true"></Button>
-            <Button icon="md-time" @click="logModal = true"></Button>
-            <Button icon="md-information-circle" @click="openDisModal"></Button>
-        </ButtonGroup>
+        <div class="toolbar">
+            <ButtonGroup vertical>
+                <Button icon="md-thumbs-up" @click="feedbackModal = true"></Button>
+                <Button icon="md-time" @click="logModal = true"></Button>
+            </ButtonGroup>
+        </div>
         <div
             style="position: absolute;top: 20px;width: auto;left: 16px;right: 0;display: flex;"
         >
