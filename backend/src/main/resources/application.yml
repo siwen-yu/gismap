@@ -1,7 +1,7 @@
 server:
-  port: 9093
+  port: 8088
   servlet:
-    context-path: /tool
+    context-path: /
   compression:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain

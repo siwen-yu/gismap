@@ -4,7 +4,7 @@ import {objToFormData} from "../common/utils";
 import {Message, Spin} from "view-design";
 
 let config = {
-    baseURL: '', 		      // 后台服务地址
+    baseURL: 'http://localhost:8088/', 		      // 后台服务地址
     timeout: 60000, 		      // 请求超时时间1分钟
     responseType: "json",
     withCredentials: true,
