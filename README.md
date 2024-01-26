@@ -72,7 +72,7 @@ npm run serve
 
 #### 海量点
 ![img.png](imgs/points.png)
-#### 轮廓、折现
+#### 轮廓、折线
 ![img.png](imgs/polygon.png)
 #### 热力图
 ![img_1.png](imgs/heatmap.png)
