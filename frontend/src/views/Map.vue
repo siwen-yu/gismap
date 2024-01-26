@@ -375,10 +375,9 @@ export default {
             let polygonLabelsLayer = new AMap.LabelsLayer(
                 this.getLabelsLayerOptions()
             );
+            let data2Lnglat = (polygon) => polygon.map((m) => [m['lng'], m['lat'], m['wgsLng'], m['wgsLat']])
             datas.list.forEach((a) => {
-                let dataArray = a.pointList.map((polygon) =>
-                    polygon.map((m) => [m['lng'], m['lat'], m['wgsLng'], m['wgsLat']])
-                );
+                let dataArray = a.pointList.map(data2Lnglat);
                 //名称里面含有自定义颜色，则更新名称及颜色
                 if (a.name.includes(this.nameColorDelimiter)) {
                     const tempArr = a.name.split(this.nameColorDelimiter);
@@ -396,6 +395,7 @@ export default {
                     line
                 );
             });
+            this.updateCenter(datas.list.flatMap(a => a.pointList.map(data2Lnglat)))
             this.gMap.add(polygonLabelsLayer);
             this.polygonLabelsLayers.push(polygonLabelsLayer);
         },
@@ -406,7 +406,7 @@ export default {
             pColor = 'blue',
             line = false
         ) {
-            let centerPoint = this.updateCenter(dataArray);
+            let centerPoint = this.getCenter(dataArray);
             let polygon;
             let pointPath;
             if (line) {
@@ -507,7 +507,6 @@ export default {
             if (p[0] > 0 && p[1] > 0) {
                 this.gMap.setCenter(new AMap.LngLat(p[0], p[1]), true);
             }
-            return p;
         },
         getCenter(dataArrays) {
             let lng = 0;
