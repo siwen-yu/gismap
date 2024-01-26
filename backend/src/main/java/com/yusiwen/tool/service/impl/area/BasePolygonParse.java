@@ -1,7 +1,7 @@
 package com.yusiwen.tool.service.impl.area;
 
 import cn.hutool.core.convert.Convert;
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import com.yusiwen.tool.enums.GcjPointSystemEnum;
 
@@ -11,9 +11,9 @@ import java.util.function.BiFunction;
 
 public abstract class BasePolygonParse implements Serializable {
 
-    public abstract List<List<Point>> str2PointList(String polygonStr, ConvertParamsV2 params);
+    public abstract List<List<Point>> str2PointList(String polygonStr, ConvertParams params);
 
-    void transferPoint(ConvertParamsV2 params, Point point, String lngStr, String latStr) {
+    void transferPoint(ConvertParams params, Point point, String lngStr, String latStr) {
         double oldLng = getPoint(lngStr, params.getFormat());
         double oldLat = getPoint(latStr, params.getFormat());
         point.setOldLng(oldLng);

@@ -1,6 +1,6 @@
 package com.yusiwen.tool.service.impl.area;
 
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import com.yusiwen.tool.util.RegexUtil;
 
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StrPolygon extends BasePolygonParse {
 
     @Override
-    public List<List<Point>> str2PointList(String polygonStr, ConvertParamsV2 params) {
+    public List<List<Point>> str2PointList(String polygonStr, ConvertParams params) {
         List<String[]> pointLngLats = RegexUtil.matchPointLngLats(polygonStr);
         List<Point> pointList = pointLngLats.stream().map(lnglat -> {
             Point point = new Point();

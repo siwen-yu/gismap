@@ -3,7 +3,7 @@ package com.yusiwen.tool.service.impl;
 import cn.hutool.core.convert.Convert;
 import com.google.common.geometry.S2LatLng;
 import com.yusiwen.tool.dto.AreaPoint;
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import com.yusiwen.tool.enums.GcjPointSystemEnum;
 import com.yusiwen.tool.enums.Wgs84PointSystemEnum;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Service
 public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
     @Override
-    public List<Point> convert(InputStream inputStream, ConvertParamsV2 params) throws IOException {
+    public List<Point> convert(InputStream inputStream, ConvertParams params) {
         BiFunction<Double, Double, double[]> function;
         if (GcjPointSystemEnum.GCJ02.toString().equals(params.getReturnCoordinate())) {
             function = GcjPointSystemEnum.getEnum(params.getCoordinate()).getFunction();
@@ -46,7 +46,7 @@ public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
         }).stream().filter(p -> p.getLng() > 0 && p.getLat() > 0).collect(Collectors.toList());
     }
 
-    private Point str2Point(String pointStr, String name, ConvertParamsV2 params,
+    private Point str2Point(String pointStr, String name, ConvertParams params,
                             BiFunction<Double, Double, double[]> function) {
         Point point = new Point();
         double lng, lat;
@@ -99,7 +99,7 @@ public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
 
 
     @Override
-    public List<AreaPoint> convertArea(InputStream inputStream, ConvertParamsV2 params) throws IOException {
+    public List<AreaPoint> convertArea(InputStream inputStream, ConvertParams params) {
         return FileUtil.lines(inputStream, line -> {
             String[] lines = line.split("\\|", -1);
             if (lines.length >= 2) {
@@ -112,7 +112,7 @@ public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
     }
 
 
-    private AreaPoint str2AreaPoint(String name, String polygonStr, ConvertParamsV2 params) {
+    private AreaPoint str2AreaPoint(String name, String polygonStr, ConvertParams params) {
         AreaPoint areaPoint = new AreaPoint();
         areaPoint.setName(name);
         BasePolygonParse basePolygonParse;

@@ -6,11 +6,6 @@ package com.yusiwen.tool.dto;
  */
 public class Point {
 
-    /**
-     * 经纬度倍率(10000000.0)
-     */
-    public static final int IRATIO = 10000000;
-
     private double lng;
     private double lat;
 
@@ -29,7 +24,7 @@ public class Point {
         this.lat = lat;
     }
 
-    public static Point createByWgs84(double lng, double lat){
+    public static Point createByWgs84(double lng, double lat) {
         Point point = new Point();
         point.setWgsLng(lng);
         point.setWgsLat(lat);

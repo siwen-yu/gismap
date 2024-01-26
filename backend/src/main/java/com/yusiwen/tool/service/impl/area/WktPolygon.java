@@ -4,7 +4,7 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.WKTReader;
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class WktPolygon extends BasePolygonParse {
 
     @Override
-    public List<List<Point>> str2PointList(String polygonStr, ConvertParamsV2 params) {
+    public List<List<Point>> str2PointList(String polygonStr, ConvertParams params) {
         List<List<Point>> polygonList = new ArrayList<>();
         try {
             Geometry geometry = new WKTReader().read(polygonStr);
@@ -34,7 +34,7 @@ public class WktPolygon extends BasePolygonParse {
         return polygonList;
     }
 
-    private List<Point> geometry2WKTPoint(Geometry geometry, ConvertParamsV2 params) {
+    private List<Point> geometry2WKTPoint(Geometry geometry, ConvertParams params) {
         return Arrays.stream(geometry.getCoordinates())
                 .map(coordinate -> {
                     Point point = new Point();

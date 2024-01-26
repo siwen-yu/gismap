@@ -1,6 +1,6 @@
 package com.yusiwen.tool.service.impl.area;
 
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import com.yusiwen.tool.util.MapHelper;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class HexPolygon extends BasePolygonParse {
 
     @Override
-    public List<List<com.yusiwen.tool.dto.Point>> str2PointList(String polygonStr, ConvertParamsV2 params) {
+    public List<List<com.yusiwen.tool.dto.Point>> str2PointList(String polygonStr, ConvertParams params) {
         List<com.yusiwen.tool.dto.Point> pointList = new ArrayList<>();
         Polygon polygon = MapHelper.createPolygon(polygonStr, params.isCloseLoop());
         if (polygon != null) {

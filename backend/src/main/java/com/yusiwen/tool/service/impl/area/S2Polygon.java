@@ -3,7 +3,7 @@ package com.yusiwen.tool.service.impl.area;
 import com.google.common.geometry.S2Cell;
 import com.google.common.geometry.S2CellId;
 import com.google.common.geometry.S2LatLng;
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class S2Polygon extends BasePolygonParse {
 
     @Override
-    public List<List<Point>> str2PointList(String polygonStr, ConvertParamsV2 params) {
+    public List<List<Point>> str2PointList(String polygonStr, ConvertParams params) {
         List<Point> pointList = new ArrayList<>();
         S2Cell s2Cell = new S2Cell(new S2CellId(NumberUtils.toLong(polygonStr, 0L)));
         for (int i = 0; i < 4; i++) {

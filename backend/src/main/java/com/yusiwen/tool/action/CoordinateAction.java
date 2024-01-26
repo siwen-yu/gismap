@@ -5,7 +5,6 @@ import com.yusiwen.tool.dto.*;
 import com.yusiwen.tool.enums.Type;
 import com.yusiwen.tool.service.ICoordinateConvertService;
 import com.yusiwen.tool.service.IFeedbackService;
-import com.yusiwen.tool.util.ActionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yusiwen
@@ -35,7 +35,7 @@ public class CoordinateAction {
 
     @PostMapping("/convert")
     public @ResponseBody
-    ResponseMsg convert(@RequestParam("file") MultipartFile file, ConvertParamsV2 params) {
+    ResponseMsg convert(@RequestParam("file") MultipartFile file, ConvertParams params) {
         List<Point> pointList = new ArrayList<>();
         String key = "";
         if (file != null && !file.isEmpty()) {
@@ -46,12 +46,12 @@ public class CoordinateAction {
                 log.error("获取上传文件失败", e);
             }
         }
-        return ResponseMsg.success(ActionUtil.responseArea(params.getType(), Type.POINT.toString(), key, pointList));
+        return ResponseMsg.success(responseArea(params.getType(), Type.POINT.toString(), key, pointList));
     }
 
     @PostMapping("/convert/area")
     public @ResponseBody
-    ResponseMsg convertArea(@RequestParam("file") MultipartFile file, ConvertParamsV2 params) {
+    ResponseMsg convertArea(@RequestParam("file") MultipartFile file, ConvertParams params) {
         List<AreaPoint> areaPointList = new ArrayList<>();
         String key = "";
         if (file != null && !file.isEmpty()) {
@@ -62,7 +62,7 @@ public class CoordinateAction {
                 log.error("获取上传文件失败", e);
             }
         }
-        return ResponseMsg.success(ActionUtil.responseArea(params.getType(), Type.POLYGON.toString(), key, areaPointList));
+        return ResponseMsg.success(responseArea(params.getType(), Type.POLYGON.toString(), key, areaPointList));
     }
 
     @PostMapping("/feedback")
@@ -71,5 +71,14 @@ public class CoordinateAction {
         feedback.setIp(ServletUtil.getClientIP(request));
         feedbackService.feedback(feedback);
         return ResponseMsg.success(new HashMap<>());
+    }
+
+    private static Map<String, Object> responseArea(String type, String bigType, String key, Object list) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("type", type);
+        data.put("bigType", bigType);
+        data.put("key", key);
+        data.put("list", list);
+        return data;
     }
 }

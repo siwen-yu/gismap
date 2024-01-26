@@ -1,6 +1,6 @@
 package com.yusiwen.tool.service.impl.area;
 
-import com.yusiwen.tool.dto.ConvertParamsV2;
+import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class StrSpecPolygon extends BasePolygonParse {
      * @return
      */
     @Override
-    public List<List<Point>> str2PointList(String polygonStr, ConvertParamsV2 params) {
+    public List<List<Point>> str2PointList(String polygonStr, ConvertParams params) {
         String[] polygonStrs = polygonStr.trim().split("]],\\[\\[", -1);
         return Arrays.stream(polygonStrs).map(ps -> Arrays.stream(ps.split("],\\[", -1)).map(pointStr -> {
             String[] split = pointStr.replace("[","").replace("]", "").split(",", -1);

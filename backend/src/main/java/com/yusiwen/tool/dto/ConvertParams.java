@@ -7,7 +7,7 @@ import com.yusiwen.tool.enums.Type;
  * @author yusiwen
  * @date 2019/12/4 10:44
  */
-public class ConvertParamsV2 {
+public class ConvertParams {
     private String coordinate = GcjPointSystemEnum.WGS84.toString();
     private String format = "double";
     private String returnCoordinate = GcjPointSystemEnum.GCJ02.toString();

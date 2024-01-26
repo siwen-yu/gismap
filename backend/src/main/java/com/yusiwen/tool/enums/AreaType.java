@@ -19,7 +19,7 @@ public enum AreaType {
         List<Point> pointList = GisUtil.getRotundity(GisUtil.getLngLatInt(doublePoint.getLng()),
                         GisUtil.getLngLatInt(doublePoint.getLat()), doublePoint.getSize())
                 .stream()
-                .map(point -> Point.createByWgs84(GisUtil.getLngLatDouble(point.getLongitude()), GisUtil.getLngLatDouble(point.getLatitude())))
+                .map(point -> Point.createByWgs84(GisUtil.getLngLatDouble(point.getLeft()), GisUtil.getLngLatDouble(point.getRight())))
                 .collect(Collectors.toList());
         return new AreaPoint("", pointList);
     }),
