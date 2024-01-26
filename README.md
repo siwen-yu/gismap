@@ -1,13 +1,13 @@
 #  GIS打点工具
 
+## 打点功能
+ 
 技术框架：vue + iview + SpringBoot
 
 地图厂商：高德地图
 
 主要功能：打印海量点，打印轮廓，打印折线，打印热力图，坐标拾取，距离测量，轮廓编辑等
 
-## 打点功能
- 
 ### 使用步骤
 
 1. 点击开始`打点按钮`或者右键地图任意位置选择`开始打点`
@@ -51,3 +51,32 @@
  
 1. 在地图任意位置点击右键，并选择`地图测距`，进入地图测距模式。
 2. `单击左键`选取多个点，查看距离，双击左键退出测距模式。
+
+## 安装
+
+### 后台
+```
+cd backend 
+mvn package
+java -jar target/backend-0.0.1.jar
+```
+### 页面
+```
+cd frontend 
+npm install
+npm run serve
+```
+
+
+## demo
+
+#### 海量点
+![img.png](imgs/points.png)
+#### 轮廓、折现
+![img.png](imgs/polygon.png)
+#### 热力图
+![img_1.png](imgs/heatmap.png)
+#### 坐标拾取 
+![img.png](imgs/pick.png)
+#### 轮廓编辑
+![img.png](imgs/edit.png)
