@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/dist:/etc/nginx/html
+
+  backend:
+    build: ./backend
+    ports:
+      - "8088:8088"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
