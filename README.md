@@ -57,6 +57,7 @@
 ```shell
 docker-compose up -d
 ```
+浏览器直接访问：http://ip:9090/
 
 ## 效果图
 ![img.png](imgs/img.png)
