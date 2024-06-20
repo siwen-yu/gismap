@@ -1,5 +1,7 @@
 package com.yusiwen.tool.service.impl;
 
+import ch.hsr.geohash.GeoHash;
+import ch.hsr.geohash.WGS84Point;
 import cn.hutool.core.convert.Convert;
 import com.google.common.geometry.S2LatLng;
 import com.yusiwen.tool.dto.AreaPoint;
@@ -55,6 +57,11 @@ public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
             S2LatLng latLng = S2Utils.cellIdCenterPoint(NumberUtils.toLong(pointStr, 0L));
             lng = latLng.lngDegrees();
             lat = latLng.latDegrees();
+        } if (isGeoHash(pointStr)) {
+            // geohash
+            WGS84Point latLng = GeoHash.fromGeohashString(pointStr).getOriginatingPoint();
+            lng = latLng.getLongitude();
+            lat = latLng.getLatitude();
         } else {
             String[] lines = RegexUtil.matchPointLngLats(pointStr).get(0);
             lng = getPoint(lines[0], params.getFormat());
