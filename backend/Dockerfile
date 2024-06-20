@@ -9,6 +9,9 @@ WORKDIR /app
 # 复制整个项目到工作目录
 COPY . .
 
+# 修改maven配置
+COPY settings.xml /usr/share/maven/conf/settings.xml
+
 # 编译和打包 Spring Boot 应用程序
 RUN mvn package -DskipTests
 

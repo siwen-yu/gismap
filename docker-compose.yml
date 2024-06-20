@@ -2,19 +2,15 @@ version: '3.3'
 
 services:
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
+    image: registry.cn-hangzhou.aliyuncs.com/yusiwen12138/gismap-backend:1.0.0
+    container_name: gismap-backend
     expose:
       - "8088"
     networks:
       - app-network
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
+    image: registry.cn-hangzhou.aliyuncs.com/yusiwen12138/gismap-frontend:1.0.0
+    container_name: gismap-frontend
     ports:
       - "9090:80"
     networks:

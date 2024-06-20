@@ -52,24 +52,14 @@
 1. 在地图任意位置点击右键，并选择`地图测距`，进入地图测距模式。
 2. `单击左键`选取多个点，查看距离，双击左键退出测距模式。
 
-## 安装
+## docker安装
 
-### 后台
-```
-cd backend 
-mvn package
-java -jar target/backend-0.0.1.jar
-```
-### 页面
-```
-cd frontend 
-npm install
-npm run serve
+```shell
+docker-compose up -d
 ```
 
-
-## demo
-
+## 效果图
+![img.png](imgs/img.png)
 #### 海量点
 ![img.png](imgs/points.png)
 #### 轮廓、折线
