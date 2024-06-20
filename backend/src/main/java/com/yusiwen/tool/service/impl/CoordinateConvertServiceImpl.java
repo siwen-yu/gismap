@@ -124,11 +124,30 @@ public class CoordinateConvertServiceImpl implements ICoordinateConvertService {
             basePolygonParse = new WktPolygon();
         } else if (polygonStr.startsWith("[[[") && polygonStr.endsWith("]]]")) {
             basePolygonParse = new StrSpecPolygon();
+        } else if (isGeoHash(polygonStr)) {
+            basePolygonParse = new GeoHashPolygon();
         } else {
             basePolygonParse = new StrPolygon();
         }
         areaPoint.setPointList(basePolygonParse.str2PointList(polygonStr, params));
         return areaPoint;
+    }
+
+    private static final String BASE32_CHARS = "0123456789bcdefghjkmnpqrstuvwxyz";
+    private boolean isGeoHash(String geohash) {
+        // GeoHash 通常为 1 到 12 个字符长
+        int length = geohash.length();
+        if (length < 1 || length > 12) {
+            return false;
+        }
+
+        // 检查字符串中的每个字符是否在 BASE32_CHARS 中
+        for (char c : geohash.toCharArray()) {
+            if (BASE32_CHARS.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isWkt(String polygonStr) {

@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.yusiwen.tool.dto.ConvertParams;
 import com.yusiwen.tool.dto.Point;
 import com.yusiwen.tool.enums.GcjPointSystemEnum;
+import com.yusiwen.tool.enums.Wgs84PointSystemEnum;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,7 +23,7 @@ public abstract class BasePolygonParse implements Serializable {
         double[] doubles = transferCoordinate(function, oldLng, oldLat);
         point.setLng(doubles[1]);
         point.setLat(doubles[0]);
-        function = GcjPointSystemEnum.getEnum(params.getCoordinate()).getFunction();
+        function = Wgs84PointSystemEnum.getEnum(params.getCoordinate()).getFunction();
         doubles = transferCoordinate(function, oldLng, oldLat);
         point.setWgsLng(doubles[1]);
         point.setWgsLat(doubles[0]);
