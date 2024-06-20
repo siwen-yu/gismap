@@ -19,12 +19,9 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /app
 
 # 将构建好的 Spring Boot JAR 文件复制到工作目录
-COPY --from=builder /app/target/backend-0.0.1.jar .
-
-# 暴露 Spring Boot 应用程序所使用的端口
-EXPOSE 8088
+COPY --from=builder /app/target/*.jar .
 
 # 定义启动命令
-CMD ["java", "-jar", "backend-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "backend-0.0.1.jar"]
 
 

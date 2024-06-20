@@ -1,21 +1,27 @@
-version: '3'
+version: '3.3'
 
 services:
-  frontend:
-    build: ./frontend
-    volumes:
-      - ./frontend/dist:/etc/nginx/html
-
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    expose:
+      - "8088"
+    networks:
+      - app-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
-      - "8088:8088"
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - "9090:80"
+    networks:
+      - app-network
     depends_on:
-      - frontend
+      - backend
+
+networks:
+  app-network:
+    driver: bridge
