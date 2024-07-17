@@ -284,10 +284,13 @@ export default {
             let type = data.type;
             let bigType = data.bigType;
             let pColor = this.$refs.modal.myColor;
+            let fillColor = this.$refs.modal.fillColor;
+            let fillOpacity = this.$refs.modal.fillOpacity;
+            let strokeWeight = this.$refs.modal.strokeWeight;
             if (bigType === 'point') {
                 this.parsePointData(data, type, pColor);
             } else if (bigType === 'polygon') {
-                this.parsePolygonData(data, type, pColor);
+                this.parsePolygonData(data, type, pColor, fillColor, fillOpacity, strokeWeight);
             }
             if (data.key && data.key.length > 0) {
                 if (this.keyDic[type] && this.keyDic[type].length > 0) {
@@ -326,12 +329,15 @@ export default {
                 this.addTrack(dataTrack, pColor);
             }
         },
-        parsePolygonData(data, type, pColor) {
+        parsePolygonData(data, type, pColor, fillColor, fillOpacity, strokeWeight) {
             this.addPolygonList(
                 data,
                 pColor,
                 type === 'polyline',
-                this.$refs.modal.randomColor
+                this.$refs.modal.randomColor,
+                fillColor,
+                fillOpacity,
+                strokeWeight
             );
         },
         addMarks(datas, pColor) {
@@ -371,7 +377,7 @@ export default {
             mass.setMap(this.gMap);
             this.massList.push(mass);
         },
-        addPolygonList(datas, pColor = 'blue', line = false, randomColor = false) {
+        addPolygonList(datas, pColor = 'blue', line = false, randomColor = false, fillColor, fillOpacity, strokeWeight) {
             let polygonLabelsLayer = new AMap.LabelsLayer(
                 this.getLabelsLayerOptions()
             );
@@ -392,7 +398,10 @@ export default {
                     dataArray,
                     a.name,
                     pColor,
-                    line
+                    line,
+                    fillColor,
+                    fillOpacity,
+                    strokeWeight
                 );
             });
             this.updateCenter(datas.list.flatMap(a => a.pointList.map(data2Lnglat)))
@@ -404,7 +413,10 @@ export default {
             dataArray,
             name = '轮廓',
             pColor = 'blue',
-            line = false
+            line = false,
+            fillColor,
+            fillOpacity,
+            strokeWeight
         ) {
             let centerPoint = this.getCenter(dataArray);
             let polygon;
@@ -422,8 +434,9 @@ export default {
             }
             polygon.setOptions({
                 path: pointPath,
-                borderWeight: 2, // 线条宽度，默认为 1
-                fillOpacity: 0,
+                fillOpacity: fillOpacity,
+                fillColor: fillColor,
+                strokeWeight: strokeWeight, // 线条宽度，默认为 1
                 strokeColor: pColor, // 线条颜色
             });
             this.gMap.add(polygon);

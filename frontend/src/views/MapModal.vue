@@ -45,6 +45,14 @@
                 </Checkbox>
             </FormItem>
             <br>
+            <FormItem label="填充颜色">
+              <ColorPicker v-model="fillColor" size="small" style="vertical-align: middle;"/>
+              &nbsp;&nbsp;&nbsp;&nbsp;透明度
+              <InputNumber :max="1" :min="0" v-model="fillOpacity" :step="0.1"></InputNumber>
+              &nbsp;&nbsp;&nbsp;&nbsp;边框宽度
+              <InputNumber :min="1" v-model="strokeWeight"></InputNumber>
+            </FormItem>
+            <br>
             <FormItem label="数据示例">
                 <template v-if="formItem.type === 'point' || formItem.type === 'track'">
                     <Tooltip :max-width="400" transfer placement="right-start"
@@ -112,6 +120,9 @@ export default {
             },
             pointShowName: false,
             randomColor: false,
+            fillColor: '#ff0000',
+            fillOpacity: 0,
+            strokeWeight: 2,
             autoIncrementName: false,
             polygonHtml: "",
             coordinateList: [
