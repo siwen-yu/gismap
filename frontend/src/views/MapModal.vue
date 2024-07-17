@@ -29,7 +29,7 @@
             </FormItem>
             <br>
             <FormItem label="附加配置">
-                <ColorPicker v-model="myColor" size="small" style="vertical-align: middle;"/>
+                <ColorPicker v-model="myColor" size="small" style="vertical-align: middle;" recommend/>
                 <Checkbox
                     v-if="formItem.type === 'point' || formItem.type === 'polygon' || formItem.type === 'polyline' || formItem.type === 'track'"
                     style="margin-left: 24px;vertical-align: middle" v-model="randomColor">随机
@@ -46,11 +46,13 @@
             </FormItem>
             <br>
             <FormItem label="填充颜色">
-              <ColorPicker v-model="fillColor" size="small" style="vertical-align: middle;"/>
+              <ColorPicker v-model="fillColor" size="small" style="vertical-align: middle;" recommend/>
               &nbsp;&nbsp;&nbsp;&nbsp;透明度
               <InputNumber :max="1" :min="0" v-model="fillOpacity" :step="0.1"></InputNumber>
               &nbsp;&nbsp;&nbsp;&nbsp;边框宽度
               <InputNumber :min="1" v-model="strokeWeight"></InputNumber>
+              &nbsp;&nbsp;&nbsp;&nbsp;标记点大小
+              <InputNumber :min="1" v-model="markFontSize"></InputNumber>
             </FormItem>
             <br>
             <FormItem label="数据示例">
@@ -123,6 +125,7 @@ export default {
             fillColor: '#ff0000',
             fillOpacity: 0,
             strokeWeight: 2,
+            markFontSize: 10,
             autoIncrementName: false,
             polygonHtml: "",
             coordinateList: [

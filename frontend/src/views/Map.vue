@@ -287,8 +287,9 @@ export default {
             let fillColor = this.$refs.modal.fillColor;
             let fillOpacity = this.$refs.modal.fillOpacity;
             let strokeWeight = this.$refs.modal.strokeWeight;
+            let markFontSize = this.$refs.modal.markFontSize;
             if (bigType === 'point') {
-                this.parsePointData(data, type, pColor);
+                this.parsePointData(data, type, pColor, markFontSize);
             } else if (bigType === 'polygon') {
                 this.parsePolygonData(data, type, pColor, fillColor, fillOpacity, strokeWeight);
             }
@@ -300,7 +301,7 @@ export default {
                 }
             }
         },
-        parsePointData(data, type, pColor) {
+        parsePointData(data, type, pColor, markFontSize) {
             let datas = data.list.map((m, index) => {
                 return {
                     lnglat: [m['lng'], m['lat']],
@@ -311,7 +312,7 @@ export default {
                 // this.addMarks(datas, pColor);
                 datas = this.handleDiffColorData(datas, pColor);
                 for (let [key, value] of datas) {
-                    this.addMarks(value, key);
+                    this.addMarks(value, key, markFontSize);
                 }
             } else if (type === 'heatmap') {
                 let dataHeat = datas.map((o) => {
@@ -340,7 +341,7 @@ export default {
                 strokeWeight
             );
         },
-        addMarks(datas, pColor) {
+        addMarks(datas, pColor, markFontSize) {
             this.updateCenter(datas.map((data) => [data.lnglat]));
             let mass = new AMap.MassMarks(datas, {
                 opacity: 0.8,
@@ -350,7 +351,7 @@ export default {
                 style: {
                     url: randomSvg(pColor),
                     anchor: new AMap.Pixel(3, 3),
-                    size: new AMap.Size(10, 10),
+                    size: new AMap.Size(markFontSize, markFontSize),
                 },
             });
             if (this.$refs.modal.pointShowName) {
@@ -438,6 +439,7 @@ export default {
                 fillColor: fillColor,
                 strokeWeight: strokeWeight, // 线条宽度，默认为 1
                 strokeColor: pColor, // 线条颜色
+                strokeOpacity: fillOpacity>0?fillOpacity:0, // 线条透明度
             });
             this.gMap.add(polygon);
             polygon.setExtData(
