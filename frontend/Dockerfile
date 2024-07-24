@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # 安装依赖
-RUN npm install
+RUN npm install --registry https://registry.npmmirror.com
 
 # 构建前端应用
 RUN npm run build
