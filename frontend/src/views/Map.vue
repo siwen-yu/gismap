@@ -350,7 +350,7 @@ export default {
                 alwaysRender: false,
                 style: {
                     url: randomSvg(pColor),
-                    anchor: new AMap.Pixel(3, 3),
+                    anchor: new AMap.Pixel(markFontSize/2, markFontSize/2),
                     size: new AMap.Size(markFontSize, markFontSize),
                 },
             });

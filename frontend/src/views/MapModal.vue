@@ -123,7 +123,7 @@ export default {
             pointShowName: false,
             randomColor: false,
             fillColor: '#ff0000',
-            fillOpacity: 0,
+            fillOpacity: 1,
             strokeWeight: 2,
             markFontSize: 10,
             autoIncrementName: false,
